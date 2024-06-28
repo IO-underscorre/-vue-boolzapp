@@ -3,3 +3,54 @@
     margin: 0;
     padding: 0;
 }
+
+:root {
+    --details-color: #00aa88;
+    --content-background-color: #ffffff;
+    --background-color: #f2f2f2;
+    --shadow-color: #00000080;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* Page wrapper */
+.page-wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.background-bar {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    background-color: var(--details-color);
+}
+
+/* Content */
+.content {
+    width: calc(100% - 40px);
+    max-width: 1600px;
+    height: calc(100% - 40px);
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 30px var(--shadow-color);
+    display: flex;
+    background-color: var(--content-background-color);
+}
+
+/* Left contact bar */
+.contacts-bar {
+    flex-basis: calc(100% / 3);
+}
+
+/* Right chat box */
+.chat-box {
+    flex-basis: calc(200% / 3);
+}
