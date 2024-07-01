@@ -5,10 +5,18 @@
 }
 
 :root {
+    font-size: 16px;
+
     --details-color: #00aa88;
-    --content-background-color: #ffffff;
+    --content-background-color: #eaeaea;
     --background-color: #f2f2f2;
-    --shadow-color: #00000080;
+    --notification-bar-background: #8edafc;
+    --secondary-color: #00000080;
+    --border-color: #00000040;
+
+    --sm-spacing-size: .75rem;
+    --md-spacing-size: 1rem;
+    --lg-spacing-size: 1.25rem;
 }
 
 body {
@@ -40,7 +48,7 @@ body {
     height: calc(100% - 40px);
     margin: 0 auto;
     border-radius: 5px;
-    box-shadow: 0 0 30px var(--shadow-color);
+    box-shadow: 0 0 30px var(--secondary-color);
     display: flex;
     background-color: var(--content-background-color);
 }
@@ -48,7 +56,141 @@ body {
 /* Left contact bar */
 .contacts-bar {
     flex-basis: calc(100% / 3);
+    border-right: solid 1px var(--border-color);
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sm-spacing-size);
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: var(--md-spacing-size);
+}
+
+.circle {
+    border-radius: 50%;
+    width: 3.25rem;
+    height: 3.25rem;
+    overflow: hidden;
+}
+
+.circle img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.text-container {
+    overflow: hidden;
+}
+
+.text-container > *:first-child {
+    display: block;
+}
+
+.text-container > *:nth-child(2) {
+    color: var(--secondary-color);
+}
+
+/* Notification row */
+.notification-row {
+    justify-content: flex-start;
+    gap: var(--sm-spacing-size);
+    background-color: var(--notification-bar-background);
+    padding: var(--md-spacing-size) var(--lg-spacing-size);
+}
+
+.notification-row > .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--notification-bar-background);
+    background-color: #ffffff;
+}
+
+.icons-container {
+    display: flex;
+    gap: var(--md-spacing-size);
+    color: var(--secondary-color);
+}
+
+.contacts-related {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Search bar */
+.search-bar {
+    display: flex;
+    width: 100%;
+    color: var(--secondary-color);
+}
+
+.search-bar > * {
+    display: block;
+    padding: .25rem var(--sm-spacing-size);
+    background-color: #ffffff;
+    border: solid 1px var(--border-color);
+}
+
+.search-bar > span {
+    border-right: none;
+}
+
+#contacts-search {
+    flex-grow: 1;
+    appearance: none;
+    outline: none;
+}
+
+/* Contacts list */
+.contacts-container {
+    overflow-y: auto;
+    flex-basis: 0;
+    flex-grow: 1;
+    border-top: solid 1px var(--border-color);
+    background-color: #ffffff;
+}
+
+.contact {
+    padding: var(--sm-spacing-size) var(--lg-spacing-size);
+    border-bottom: solid 1px var(--border-color);
+}
+
+.contact:hover {
+    background-color: #00000010;
+}
+
+.contact.selected {
+    background-color: #00000020;
+}
+
+.contact .circle {
+    width: 4rem;
+    height: 4rem;
+}
+
+.last-message {
+    font-size: .75rem;
+}
+
+.last-message-time {
+    align-self: flex-start;
+    font-size: .75rem;
+    color: var(--secondary-color);
+}
+
 
 /* Right chat box */
 .chat-box {
