@@ -83,7 +83,7 @@
 
                     <!-- Contacts list -->
                     <ul class="contacts-container">
-                        <li class="contact row" v-for="(contact , index) in contacts" :key="index">
+                        <li class="contact row" :class="{selected: index === selectedContactIndex}" v-for="(contact , index) in contacts" :key="index" @click="selectedContactIndex = index">
                             <div class="profile">
                                 <div class="circle">
                                     <img :src="contact.avatar" :alt="contact.name">
@@ -99,7 +99,7 @@
                             </div>
 
                             <span class="last-message-time">
-                                {{contact.messages[contact.messages.length - 1].date}}
+                                {{getMessageTime(index , contact.messages.length - 1)}}
                             </span>
                         </li>
                     </ul>
@@ -108,64 +108,69 @@
 
             <!-- Right chat side -->
             <div class="chat-side">
-                <!-- Top row with profile details of the user courrently chatting with -->
-                <div class="row">
-                    <div class="profile">
-                        <div class="circle">
-                            <img src="img/placeholder.png" alt="PLACEHOLDER">
+                <template v-if="selectedContactIndex !== null">
+                    <!-- Top row with profile details of the user courrently chatting with -->
+                    <div class="row">
+                        <div class="profile">
+                            <div class="circle">
+                                <img src="img/placeholder.png" alt="PLACEHOLDER">
+                            </div>
+                            
+                            <div class="text-container">
+                                <span class="user-name">
+                                    {{contacts[selectedContactIndex].name}}
+                                </span>
+                                <span class="user-status">
+                                    PLACEHOLDER AT 00:00
+                                </span>
+                            </div>
                         </div>
+    
+                        <div class="icons-container">
+                            <span class="icon">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+                            <span class="icon">
+                                <i class="fa-solid fa-paperclip"></i>
+                            </span>
+                            <span class="icon">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </span>
+                        </div>
+                    </div>
+    
+                    <!-- Chat container -->
+                    <div class="chat-container">
+                        <ol class="chat">
+                            <li class="message" :class="{sent: message.status === 'sent'}" v-for="(message , messageIndex) in contacts[selectedContactIndex].messages" :key="messageIndex">
+                                <span class="text-of-message">{{message.message}}</span>
+                                <span class="time-of-message">{{getMessageTime(selectedContactIndex , messageIndex)}}</span>
+                            </li>
+                        </ol>
+                    </div>
+    
+                    <!-- Bottom row with chat options -->
+                    <menu class="chat-menu row">
+                        <li class="chat-option">
+                            <i class="fa-regular fa-face-smile"></i>
+                        </li>
                         
-                        <div class="text-container">
-                            <span class="user-name">
-                                PLACEHOLDER
-                            </span>
-                            <span class="user-status">
-                                PLACEHOLDER AT 00:00
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="icons-container">
-                        <span class="icon">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </span>
-                        <span class="icon">
-                            <i class="fa-solid fa-paperclip"></i>
-                        </span>
-                        <span class="icon">
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Chat container -->
-                <div class="chat-container">
-                    <ol class="chat">
-                        <li class="message">
-                            <span class="text-of-message">PLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDER</span>
-                            <span class="time-of-message">00:00</span>
+                        <li class="send-message">
+                            <input type="text" id="message-input" placeholder="Scrivi un messaggio">
                         </li>
-                        <li class="message sent">
-                            <span class="text-of-message">PLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDER</span>
-                            <span class="time-of-message">00:00</span>
+    
+                        <li class="chat-option">
+                            <i class="fa-solid fa-microphone"></i>
                         </li>
-                    </ol>
-                </div>
-
-                <!-- Bottom row with chat options -->
-                <menu class="chat-menu row">
-                    <li class="chat-option">
-                        <i class="fa-regular fa-face-smile"></i>
-                    </li>
-                    
-                    <li class="send-message">
-                        <input type="text" id="message-input" placeholder="Scrivi un messaggio">
-                    </li>
-
-                    <li class="chat-option">
-                        <i class="fa-solid fa-microphone"></i>
-                    </li>
-                </menu>
+                    </menu>
+                </template>
+                <template v-else>
+                    <div class="no-active-chat">
+                        <strong>
+                            Per iniziare una nuova conversazione fai <span>click</span> su un contatto!
+                        </strong>
+                    </div>
+                </template>
             </div>
         </div>
     </div>

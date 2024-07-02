@@ -165,7 +165,17 @@ createApp({
                         }
                     ],
                 }
-            ]
+            ],
+
+            selectedContactIndex: null
+        }
+    },
+
+    methods: {
+        getMessageTime(contactIndex , messageIndex) {
+            const dateAndTimeTuple = this.contacts[contactIndex].messages[messageIndex].date.split(' ');
+            const timeSplitted = dateAndTimeTuple[1].split(':');
+            return `${timeSplitted[0]}:${timeSplitted[1]}`;
         }
     }
 }).mount('#app');
