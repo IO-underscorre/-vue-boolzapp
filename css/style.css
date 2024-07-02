@@ -223,7 +223,7 @@ input {
 .chat-container {
     overflow-y: auto;
     flex: 1 0 0;
-    background: center / cover no-repeat url("../images/background/chat-background.jpg");
+    background: center / cover no-repeat url("../img/background/chat-background.jpg");
     position: relative;
     overflow-y: auto;
     display: flex;
