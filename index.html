@@ -26,7 +26,7 @@
         <div class="content">
             <!-- Left contact bar -->
             <div class="contacts-bar">
-                <!-- Top profile row -->
+                <!-- Top row with profile details of the user logged in -->
                 <div class="row">
                     <div class="profile">
                         <div class="circle">
@@ -71,7 +71,7 @@
 
                 <!-- Contacts related container -->
                 <div class="contacts-related">
-                    <!-- Search bar -->
+                    <!-- Search bar for contacts -->
                     <div class="row">
                         <nav class="search-bar">
                             <span>
@@ -106,8 +106,67 @@
                 </div>
             </div>
 
-            <!-- Right chat box -->
-            <div class="chat-box"></div>
+            <!-- Right chat side -->
+            <div class="chat-side">
+                <!-- Top row with profile details of the user courrently chatting with -->
+                <div class="row">
+                    <div class="profile">
+                        <div class="circle">
+                            <img src="images/placeholder.png" alt="PLACEHOLDER">
+                        </div>
+                        
+                        <div class="text-container">
+                            <span class="user-name">
+                                PLACEHOLDER
+                            </span>
+                            <span class="user-status">
+                                PLACEHOLDER AT 00:00
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="icons-container">
+                        <span class="icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        <span class="icon">
+                            <i class="fa-solid fa-paperclip"></i>
+                        </span>
+                        <span class="icon">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Chat container -->
+                <div class="chat-container">
+                    <ol class="chat">
+                        <li class="message">
+                            <span class="text-of-message">PLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDER</span>
+                            <span class="time-of-message">00:00</span>
+                        </li>
+                        <li class="message sent">
+                            <span class="text-of-message">PLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDER</span>
+                            <span class="time-of-message">00:00</span>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Bottom row with chat options -->
+                <menu class="chat-menu row">
+                    <li class="chat-option">
+                        <i class="fa-regular fa-face-smile"></i>
+                    </li>
+                    
+                    <li class="send-message">
+                        <input type="text" id="message-input" placeholder="Scrivi un messaggio">
+                    </li>
+
+                    <li class="chat-option">
+                        <i class="fa-solid fa-microphone"></i>
+                    </li>
+                </menu>
+            </div>
         </div>
     </div>
 
