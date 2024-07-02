@@ -83,23 +83,23 @@
 
                     <!-- Contacts list -->
                     <ul class="contacts-container">
-                        <li class="contact row">
+                        <li class="contact row" v-for="(contact , index) in contacts" :key="index">
                             <div class="profile">
                                 <div class="circle">
-                                    <img src="images/placeholder.png" alt="PLACEHOLDER">
+                                    <img :src="contact.avatar" :alt="contact.name">
                                 </div>
                                 <div class="text-container">
                                     <span class="user-name">
-                                        PLACEHOLDER
+                                        {{contact.name}}
                                     </span>
                                     <span class="last-message">
-                                        PLACEHOLDER
+                                        {{contact.name}}
                                     </span>
                                 </div>
                             </div>
 
                             <span class="last-message-time">
-                                00:00
+                                {{contact.messages[contact.messages.length - 1].date}}
                             </span>
                         </li>
                     </ul>
