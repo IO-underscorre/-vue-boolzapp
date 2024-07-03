@@ -77,13 +77,13 @@
                             <span>
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
-                            <input type="text" id="contacts-search" placeholder="Cerca o inizia una nuova conversazione">
+                            <input type="text" id="contacts-search" placeholder="Cerca una conversazione" v-model="userFilter" @keyup="filterContactList()">
                         </nav>
                     </div>
 
                     <!-- Contacts list -->
                     <ul class="contacts-container">
-                        <li class="contact row" :class="{selected: index === selectedContactIndex}" v-for="(contact , index) in contacts" :key="index" @click="selectedContactIndex = index">
+                        <li class="contact row" :class="{selected: index === selectedContactIndex}" v-for="(contact , index) in contacts" :key="index" @click="selectedContactIndex = index" v-show="contact.visible">
                             <div class="profile">
                                 <div class="circle">
                                     <img :src="contact.avatar" :alt="contact.name">

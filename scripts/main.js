@@ -168,7 +168,9 @@ createApp({
             ],
             selectedContactIndex: null,
 
-            messageInputed: ''
+            messageInputed: '',
+
+            userFilter: ''
         }
     },
 
@@ -223,6 +225,12 @@ createApp({
             setTimeout(() => {
                 this.getNewMessage(0);
             }, 1000);
+        },
+
+        filterContactList() {
+            this.contacts.forEach(contact => {
+                contact.visible = contact.name.toLowerCase().includes(this.userFilter) ? true : false;
+            });
         }
     }
 }).mount('#app');
