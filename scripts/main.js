@@ -206,6 +206,23 @@ createApp({
                 this.messageInputed = '';
             }
         },
+
+        getNewMessage(contactIndex) {
+            axios.get('https://flynn.boolean.careers/exercises/api/random/sentence')
+            .then(callReturn => {
+                this.pushNewMessage(callReturn.data.response , contactIndex , true);
+                if(this.selectedContactIndex === contactIndex) {
+                    this.selectedContactIndex = 0;
+                } else {
+                    this.selectedContactIndex = this.selectedContactIndex > contactIndex ? this.selectedContactIndex : ++this.selectedContactIndex;
+                }
+            });
+        },
+
+        placeholderNewMessageCall() {
+            setTimeout(() => {
+                this.getNewMessage(0);
+            }, 1000);
         }
     }
 }).mount('#app');
