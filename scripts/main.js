@@ -166,8 +166,9 @@ createApp({
                     ],
                 }
             ],
+            selectedContactIndex: null,
 
-            selectedContactIndex: null
+            messageInputed: ''
         }
     },
 
@@ -176,6 +177,35 @@ createApp({
             const dateAndTimeTuple = this.contacts[contactIndex].messages[messageIndex].date.split(' ');
             const timeSplitted = dateAndTimeTuple[1].split(':');
             return `${timeSplitted[0]}:${timeSplitted[1]}`;
+        },
+
+        getCurrentDateString() {
+            const currentDate = new Date();
+            return ('0' + currentDate.getDate()).slice(-2) + '/' + ('0' + (currentDate.getMonth() + 1)).slice(-2) + `/${currentDate.getFullYear()} ` + ('00' + currentDate.getHours()).slice(-2) + ':' + ('00' + currentDate.getMinutes()).slice(-2) + ':' + ('00' + currentDate.getSeconds()).slice(-2);
+        },
+
+        pushNewMessage(messageString , contactIndex, isRecived) {
+            const newMessage = {
+                date: this.getCurrentDateString(),
+                message: messageString,
+                status: isRecived? 'recived' : 'sent'
+            };
+            const contact = this.contacts[contactIndex];
+            contact.messages.push(newMessage);
+            this.contacts.splice(contactIndex , 1);
+            this.contacts.unshift(contact);
+        },
+
+        sendNewMessage() {
+            if(/\S/i.test(this.messageInputed)) {
+                this.pushNewMessage(this.messageInputed , this.selectedContactIndex , false)
+                this.selectedContactIndex = 0;
+                this.messageInputed = '';
+                this.placeholderNewMessageCall();
+            } else {
+                this.messageInputed = '';
+            }
+        },
         }
     }
 }).mount('#app');

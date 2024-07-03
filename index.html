@@ -63,7 +63,7 @@
                         <span>
                             Ricevi notifiche di nuovi messaggi
                         </span>
-                        <a href="">
+                        <a href="#">
                             Attiva notifiche desktop
                         </a>
                     </div>
@@ -142,9 +142,9 @@
                     <!-- Chat container -->
                     <div class="chat-container">
                         <ol class="chat">
-                            <li class="message" :class="{sent: message.status === 'sent'}" v-for="(message , messageIndex) in contacts[selectedContactIndex].messages" :key="messageIndex">
+                            <li class="message" :class="{sent: message.status === 'sent'}" v-for="(message , messageIndex) in contacts[selectedContactIndex].messages.slice().reverse()" :key="messageIndex">
                                 <span class="text-of-message">{{message.message}}</span>
-                                <span class="time-of-message">{{getMessageTime(selectedContactIndex , messageIndex)}}</span>
+                                <span class="time-of-message">{{getMessageTime(selectedContactIndex , contacts[selectedContactIndex].messages.length - 1 - messageIndex)}}</span>
                             </li>
                         </ol>
                     </div>
@@ -152,15 +152,22 @@
                     <!-- Bottom row with chat options -->
                     <menu class="chat-menu row">
                         <li class="chat-option">
-                            <i class="fa-regular fa-face-smile"></i>
+                            <a href="#">
+                                <i class="fa-regular fa-face-smile"></i>
+                            </a>
                         </li>
                         
                         <li class="send-message">
-                            <input type="text" id="message-input" placeholder="Scrivi un messaggio">
+                            <input type="text" id="message-input" placeholder="Scrivi un messaggio" v-model="messageInputed" @keyup.enter="sendNewMessage()">
                         </li>
     
                         <li class="chat-option">
-                            <i class="fa-solid fa-microphone"></i>
+                            <a href="#" v-if="messageInputed">
+                                <i class="fa-solid fa-paper-plane" @click="sendNewMessage()"></i>
+                            </a>
+                            <a href="#" v-else>
+                                <i class="fa-solid fa-microphone"></i>
+                            </a>
                         </li>
                     </menu>
                 </template>
