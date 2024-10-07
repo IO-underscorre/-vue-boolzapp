@@ -23,7 +23,8 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-menu , ol {
+menu,
+ol {
     list-style: none;
 }
 
@@ -70,7 +71,9 @@ a {
     background-color: var(--content-background-color);
 }
 
-.user-name , .last-message , .user-status {
+.user-name,
+.last-message,
+.user-status {
     white-space: nowrap;
 }
 
@@ -112,11 +115,11 @@ a {
     height: 100%;
 }
 
-.text-container > *:first-child {
+.text-container>*:first-child {
     display: block;
 }
 
-.text-container > *:nth-child(2) {
+.text-container>*:nth-child(2) {
     color: var(--secondary-color);
 }
 
@@ -126,15 +129,23 @@ a {
     gap: var(--sm-spacing-size);
     background-color: var(--notification-bar-background);
     padding: var(--md-spacing-size) var(--lg-spacing-size);
+    position: relative;
 }
 
-.notification-row > .circle {
+.notification-row>.circle {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
     color: var(--notification-bar-background);
     background-color: #ffffff;
+}
+
+.notification-row>.close {
+    justify-self: end;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--secondary-color);
 }
 
 .icons-container {
@@ -156,14 +167,14 @@ a {
     color: var(--secondary-color);
 }
 
-.search-bar > * {
+.search-bar>* {
     display: block;
     padding: .25rem var(--sm-spacing-size);
     background-color: #ffffff;
     border: solid 1px var(--border-color);
 }
 
-.search-bar > span {
+.search-bar>span {
     border-right: none;
 }
 

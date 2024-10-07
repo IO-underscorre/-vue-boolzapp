@@ -168,6 +168,8 @@ createApp({
             ],
             selectedContactIndex: null,
 
+            notificationOpened: true,
+
             messageInputed: '',
 
             userFilter: ''
