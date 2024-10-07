@@ -6,7 +6,7 @@ createApp({
             contacts: [
                 {
                     name: 'Michele',
-                    avatar: './img/avatar_1.png',
+                    avatar: 'https://picsum.photos/id/10/200',
                     visible: true,
                     messages: [
                         {
@@ -28,7 +28,7 @@ createApp({
                 },
                 {
                     name: 'Fabio',
-                    avatar: './img/avatar_2.png',
+                    avatar: 'https://picsum.photos/id/20/200',
                     visible: true,
                     messages: [
                         {
@@ -50,7 +50,7 @@ createApp({
                 },
                 {
                     name: 'Samuele',
-                    avatar: './img/avatar_3.png',
+                    avatar: 'https://picsum.photos/id/30/200',
                     visible: true,
                     messages: [
                         {
@@ -72,7 +72,7 @@ createApp({
                 },
                 {
                     name: 'Alessandro B.',
-                    avatar: './img/avatar_4.png',
+                    avatar: 'https://picsum.photos/id/40/200',
                     visible: true,
                     messages: [
                         {
@@ -89,7 +89,7 @@ createApp({
                 },
                 {
                     name: 'Alessandro L.',
-                    avatar: './img/avatar_5.png',
+                    avatar: 'https://picsum.photos/id/50/200',
                     visible: true,
                     messages: [
                         {
@@ -106,7 +106,7 @@ createApp({
                 },
                 {
                     name: 'Claudia',
-                    avatar: './img/avatar_6.png',
+                    avatar: 'https://picsum.photos/id/60/200',
                     visible: true,
                     messages: [
                         {
@@ -128,7 +128,7 @@ createApp({
                 },
                 {
                     name: 'Federico',
-                    avatar: './img/avatar_7.png',
+                    avatar: 'https://picsum.photos/id/70/200',
                     visible: true,
                     messages: [
                         {
@@ -145,7 +145,7 @@ createApp({
                 },
                 {
                     name: 'Davide',
-                    avatar: './img/avatar_8.png',
+                    avatar: 'https://picsum.photos/id/80/200',
                     visible: true,
                     messages: [
                         {
@@ -175,7 +175,7 @@ createApp({
     },
 
     methods: {
-        getMessageTime(contactIndex , messageIndex) {
+        getMessageTime(contactIndex, messageIndex) {
             const dateAndTimeTuple = this.contacts[contactIndex].messages[messageIndex].date.split(' ');
             const timeSplitted = dateAndTimeTuple[1].split(':');
             return `${timeSplitted[0]}:${timeSplitted[1]}`;
@@ -186,21 +186,21 @@ createApp({
             return ('0' + currentDate.getDate()).slice(-2) + '/' + ('0' + (currentDate.getMonth() + 1)).slice(-2) + `/${currentDate.getFullYear()} ` + ('00' + currentDate.getHours()).slice(-2) + ':' + ('00' + currentDate.getMinutes()).slice(-2) + ':' + ('00' + currentDate.getSeconds()).slice(-2);
         },
 
-        pushNewMessage(messageString , contactIndex, isRecived) {
+        pushNewMessage(messageString, contactIndex, isRecived) {
             const newMessage = {
                 date: this.getCurrentDateString(),
                 message: messageString,
-                status: isRecived? 'recived' : 'sent'
+                status: isRecived ? 'recived' : 'sent'
             };
             const contact = this.contacts[contactIndex];
             contact.messages.push(newMessage);
-            this.contacts.splice(contactIndex , 1);
+            this.contacts.splice(contactIndex, 1);
             this.contacts.unshift(contact);
         },
 
         sendNewMessage() {
-            if(/\S/i.test(this.messageInputed)) {
-                this.pushNewMessage(this.messageInputed , this.selectedContactIndex , false)
+            if (/\S/i.test(this.messageInputed)) {
+                this.pushNewMessage(this.messageInputed, this.selectedContactIndex, false)
                 this.selectedContactIndex = 0;
                 this.messageInputed = '';
                 this.placeholderNewMessageCall();
@@ -211,14 +211,14 @@ createApp({
 
         getNewMessage(contactIndex) {
             axios.get('https://flynn.boolean.careers/exercises/api/random/sentence')
-            .then(callReturn => {
-                this.pushNewMessage(callReturn.data.response , contactIndex , true);
-                if(this.selectedContactIndex === contactIndex) {
-                    this.selectedContactIndex = 0;
-                } else {
-                    this.selectedContactIndex = this.selectedContactIndex > contactIndex ? this.selectedContactIndex : ++this.selectedContactIndex;
-                }
-            });
+                .then(callReturn => {
+                    this.pushNewMessage(callReturn.data.response, contactIndex, true);
+                    if (this.selectedContactIndex === contactIndex) {
+                        this.selectedContactIndex = 0;
+                    } else {
+                        this.selectedContactIndex = this.selectedContactIndex > contactIndex ? this.selectedContactIndex : ++this.selectedContactIndex;
+                    }
+                });
         },
 
         placeholderNewMessageCall() {
@@ -229,8 +229,23 @@ createApp({
 
         filterContactList() {
             this.contacts.forEach(contact => {
-                contact.visible = contact.name.toLowerCase().includes(this.userFilter) ? true : false;
+                contact.visible = contact.name.toLowerCase().includes(this.userFilter.toLowerCase()) ? true : false;
             });
+        }
+    },
+
+    computed: {
+        getSelectedContactLastSentMessageTime() {
+            if (this.selectedContactIndex === null) {
+                return false;
+            } else {
+                let lastMessageIndex = this.contacts[this.selectedContactIndex].messages.findLastIndex(message => message.status === 'received');
+                if (lastMessageIndex === -1) {
+                    return 'No messages recived';
+                } else {
+                    return this.getMessageTime(this.selectedContactIndex, lastMessageIndex);
+                }
+            }
         }
     }
 }).mount('#app');
